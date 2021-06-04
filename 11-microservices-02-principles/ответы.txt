@@ -15,7 +15,7 @@ Authentication failed, check your access credentials
 curl -X GET http://localhost/images/611a7e06-a7b6-4383-b279-dd3983b74754.jpg
 401
 
-curl -X GET -H 'Content-Type: application/json' -d '{"login":"bob", "password":"qwe123"}' http://localhost/images/500873ef-79e1-4246-8faf-abc0d44a05bc.jpg
+curl -X GET -H "Authorization: Bearer $(curl -X POST -H 'Content-Type: application/json' -d '{"login":"bob", "password":"qwe123"}' http://localhost/token)" http://localhost/images/500873ef-79e1-4246-8faf-abc0d44a05bc.jpg
 
 curl -X POST \
 -H "Authorization: Bearer $(curl -X POST -H 'Content-Type: application/json' -d '{"login":"bob", "password":"qwe123"}' http://localhost/token/validation)" \

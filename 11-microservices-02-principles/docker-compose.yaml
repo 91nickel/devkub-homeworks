@@ -82,30 +82,10 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     restart: unless-stopped
-    depends_on:
-      - nodeexporter
     ports:
       - 9090:9090
     expose:
       - 9090
-
-  nodeexporter:
-    image: prom/node-exporter:v1.0.1
-    container_name: nodeexporter
-    volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
-    command:
-      - '--path.procfs=/host/proc'
-      - '--path.rootfs=/rootfs'
-      - '--path.sysfs=/host/sys'
-      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
-    restart: unless-stopped
-    ports:
-      - 9100:9100
-    expose:
-      - 9100
 
   grafana:
     image: grafana/grafana:7.4.0
